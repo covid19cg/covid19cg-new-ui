@@ -22,7 +22,7 @@ class DefaultHeader extends Component {
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <h4 style={{margin: 0}} className="navbar-brand">COVID-19 CG</h4>
+        <Link className="navbar-brand">COVID-19 CG</Link>
         {/* <AppNavbarBrand
           full={{ src: logo, width: 89, height: 25, alt: 'Covid-19 CG' }}
           minimized={{ src: sygnet, width: 30, height: 30, alt: 'Covid-19 CG' }}
@@ -38,9 +38,13 @@ class DefaultHeader extends Component {
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
-          {/* <NavItem className="d-md-down-none">
-            <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
-          </NavItem> */}
+          <NavItem className="mr-2">
+            <select className="form-control">
+              <option>English</option>
+              <option>Hindi</option>
+            </select>
+            {/* <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink> */}
+          </NavItem>
 
 
           {/* <UncontrolledDropdown nav direction="down">
@@ -75,3 +79,4 @@ DefaultHeader.propTypes = propTypes;
 DefaultHeader.defaultProps = defaultProps;
 
 export default DefaultHeader;
+
