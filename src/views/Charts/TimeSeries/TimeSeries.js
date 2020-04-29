@@ -444,7 +444,7 @@ function TimeSeries(props) {
               <button
                 type="button"
                 onClick={() => setLastDaysCount(14)}
-                className={'btn btn-outline-secondary ' + (lastDaysCount === 14 ? 'selected' : '')}
+                className={'btn btn-outline-secondary ' + (lastDaysCount === 14 ? 'active' : '')}
                 aria-label="14 days"
               >
                 2 Weeks
@@ -455,7 +455,7 @@ function TimeSeries(props) {
       </div>
 
       <div className="TimeSeries row fadeInUp" style={{ animationDelay: '.7s' }}>
-        <div className="col-12 col-sm-6 col-lg-3">
+        <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent" ref={wrapperRef}>
             <div className="stats">
               <h5 className={`${!moving ? 'title' : ''}`}>Confirmed</h5>
@@ -473,7 +473,7 @@ function TimeSeries(props) {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-lg-3">
+        <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-blue">
             <div className="stats is-blue">
               <h5 className={`${!moving ? 'title' : ''}`}>Active</h5>
@@ -491,7 +491,7 @@ function TimeSeries(props) {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-lg-3">
+        <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-green">
             <div className="stats is-green">
               <h5 className={`${!moving ? 'title' : ''}`}>Recovered</h5>
@@ -509,7 +509,7 @@ function TimeSeries(props) {
           </div>
         </div>
 
-        <div className="col-12 col-sm-6 col-lg-3">
+        <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-gray">
             <div className="stats is-gray">
               <h5 className={`${!moving ? 'title' : ''}`}>Deceased</h5>

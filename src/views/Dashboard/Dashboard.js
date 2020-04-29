@@ -1,5 +1,6 @@
 import React, { Component, lazy, Suspense } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
+import axios from 'axios';
 import {
   Badge,
   Button,
@@ -465,6 +466,10 @@ class Dashboard extends Component {
     };
   }
 
+  componentDidMount() {
+    // axios.get('https://api.covid19india.org/data.json');
+  }
+
   toggle() {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
@@ -484,9 +489,19 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col>
+          <Col lg="6">
             <Card>
-              <CardBody style={{paddingBottom: 5}}>
+              <CardBody style={{ paddingBottom: 5 }}>
+                <div>
+
+                  {/* <ScaleGraph /> */}
+                </div>
+              </CardBody>
+            </Card>
+          </Col>
+          <Col lg="6">
+            <Card>
+              <CardBody style={{ paddingBottom: 5 }}>
                 <div>
                   <ScaleGraph />
                 </div>
