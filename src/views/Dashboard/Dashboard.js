@@ -489,7 +489,7 @@ class Dashboard extends Component {
     return (
       <div className="animated fadeIn">
         <Row>
-          <Col lg="6">
+          <Col lg="4">
             <Card>
               <CardBody style={{ paddingBottom: 5 }}>
                 <div>
@@ -499,7 +499,7 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-          <Col lg="6">
+          <Col lg="8">
             <Card>
               <CardBody style={{ paddingBottom: 5 }}>
                 <div>
