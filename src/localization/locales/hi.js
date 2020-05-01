@@ -25,7 +25,7 @@ export default {
     status: {
       confirmed: 'पुष्टीकृत',
       active: 'सक्रिय',
-      recovered: 'स्वस्थ होनेवाला',
+      recovered: 'स्वस्थ',
       deceased: 'मृतक'
     }
   },

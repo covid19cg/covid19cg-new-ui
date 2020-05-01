@@ -35,7 +35,6 @@ class DefaultLayout extends Component {
   render() {
 
     const { localization: { menus, header} } = this.props;
-    console.log({ routes });
 
     return (
       <div className="app">
@@ -55,12 +54,9 @@ class DefaultLayout extends Component {
             <AppSidebarMinimizer />
           </AppSidebar>
           <main className="main">
-            <Row className="mb-4">
-              <Col>
-                <br />
-              </Col>
+            <Row className="mb-3">
             </Row>
-            <Container fluid>
+            <Container fluid style={{padding: '0 20px'}}>
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
