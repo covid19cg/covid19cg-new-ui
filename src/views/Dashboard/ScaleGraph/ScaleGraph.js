@@ -27,16 +27,17 @@ class ScaleGraph extends Component {
   render() {
 
     const { timeseries, timeseriesLogMode, graphOption, timeseriesMode } = this.state;
+    const { localization } = this.props;
 
     return <>
       {timeseries.length > 0 &&
         <TimeSeries
+          localization={localization}
           timeseries={timeseries}
           type={graphOption}
           mode={timeseriesMode}
           logMode={timeseriesLogMode}
         />}
-      {/* <h1>Scale Graph</h1> */}
     </>
   }
 }

@@ -1,33 +1,65 @@
 import React, { Component } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
-// import { renderRoutes } from 'react-router-config';
 import './App.scss';
+import LocalizedStrings from 'react-localization';
+import localization from './localization';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
 // Containers
 const DefaultLayout = React.lazy(() => import('./containers/DefaultLayout'));
 
-// Pages
-const Login = React.lazy(() => import('./views/Pages/Login'));
-const Register = React.lazy(() => import('./views/Pages/Register'));
-const Page404 = React.lazy(() => import('./views/Pages/Page404'));
-const Page500 = React.lazy(() => import('./views/Pages/Page500'));
-
+const DEFAULT_LOCALE = 'en';
 class App extends Component {
 
+  appLocalization = new LocalizedStrings(localization);
+  selectedLocale = DEFAULT_LOCALE;
+  constructor(props, state) {
+    super(props, state);
+    this.setLocale();
+  }
+
+  setLocale() {
+    this.selectedLocale = this.getLocale();
+    this.appLocalization.setLanguage(this.selectedLocale);
+    this.state = {
+      localization: this.appLocalization,
+      selectedLocale: this.selectedLocale
+    }
+  }
+
+  getLocale() {
+    const locale = localStorage.getItem('locale');
+    if (locale) {
+      return locale;
+    }
+
+    return DEFAULT_LOCALE;
+  }
+
+  changeLanguage(code) {
+    if (Object.keys(localization).includes(code)) {
+      this.appLocalization.setLanguage(code);
+      localStorage.setItem('locale', code);
+      this.setState({
+        selectedLocale: code
+      });
+    }
+  }
+
   render() {
+    const localizationProps = {
+      localization: this.state.localization,
+      updateLanguage: this.changeLanguage.bind(this)
+    };
+
     return (
       <HashRouter>
-          <React.Suspense fallback={loading()}>
-            <Switch>
-              <Route exact path="/login" name="Login Page" render={props => <Login {...props}/>} />
-              <Route exact path="/register" name="Register Page" render={props => <Register {...props}/>} />
-              <Route exact path="/404" name="Page 404" render={props => <Page404 {...props}/>} />
-              <Route exact path="/500" name="Page 500" render={props => <Page500 {...props}/>} />
-              <Route path="/" name="Home" render={props => <DefaultLayout {...props}/>} />
-            </Switch>
-          </React.Suspense>
+        <React.Suspense fallback={loading()}>
+          <Switch>
+            <Route path="/" name="Home" render={props => <DefaultLayout {...props} {...localizationProps} />} />
+          </Switch>
+        </React.Suspense>
       </HashRouter>
     );
   }

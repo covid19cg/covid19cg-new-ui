@@ -481,20 +481,21 @@ class Dashboard extends Component {
 
   render() {
 
+    const { localization } = this.props;
     return (
       <div className="animated fadeIn">
         <Row>
           <Col>
             <Card>
-              <CardBody style={{paddingBottom: 5}}>
+              <CardBody style={{ paddingBottom: 5 }}>
                 <div>
-                  <ScaleGraph />
+                  <ScaleGraph localization={{ ...localization.common, ...localization.covid }} />
                 </div>
               </CardBody>
             </Card>
           </Col>
         </Row>
-        <Row>
+        {/* <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
@@ -591,8 +592,8 @@ class Dashboard extends Component {
               </div>
             </Card>
           </Col>
-        </Row>
-        <Row>
+        </Row> */}
+        {/* <Row>
           <Col>
             <Card>
               <CardBody>
@@ -647,9 +648,9 @@ class Dashboard extends Component {
               </CardFooter>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+        {/* <Row>
           <Col xs="6" sm="6" lg="3">
             <Suspense fallback={this.loading()}>
               <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
@@ -689,9 +690,9 @@ class Dashboard extends Component {
               </Widget03>
             </Suspense>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+        {/* <Row>
           <Col>
             <Card>
               <CardHeader>
@@ -1131,7 +1132,7 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
       </div>
     );
   }
