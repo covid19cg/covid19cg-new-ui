@@ -31,6 +31,15 @@ export default {
       recovered: 'स्वस्थ',
       deceased: 'मृतक',
       tested: 'परीक्षण किया'
+    },
+    deep_dive: {
+      total_cases: 'कुल मामले',
+      daily_cases: 'दैनिक मामले',
+      total_cases_by_state: 'राज्य द्वारा कुल मामले',
+      states_growth_trend: 'राज्य - विकास की प्रवृत्ति',
+      patient_gender: 'रोगी लिंग',
+      patients_by_age: 'उम्र के हिसाब से मरीज',
+      patients_by_nationality: 'राष्ट्रीयता के मरीज'
     }
   },
   breadcrumb: {
