@@ -36,7 +36,8 @@ export default {
   header: {
     menus: {
       dashboard: 'डैशबोर्ड',
-      emergency_contacts: 'आपातकालीन संपर्क'
+      emergency_contacts: 'आपातकालीन संपर्क',
+      reports: 'रिपोर्ट'
     }
   },
   menus: [
@@ -62,6 +63,11 @@ export default {
       name: 'आवश्यक जानकारी',
       url: '/essentials',
       icon: 'icon-pencil',
+    },
+    {
+      name: 'रिपोर्ट',
+      url: '/reports',
+      icon: 'icon-puzzle'
     }
   ]
 };

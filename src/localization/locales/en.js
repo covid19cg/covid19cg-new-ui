@@ -36,7 +36,8 @@ export default {
   header: {
     menus: {
       dashboard: 'Dashboard',
-      emergency_contacts: 'Emergency Contacts'
+      emergency_contacts: 'Emergency Contacts',
+      reports: 'Reports'
     }
   },
   menus: [
@@ -62,6 +63,11 @@ export default {
       name: 'Essentials',
       url: '/essentials',
       icon: 'icon-pencil',
+    },
+    {
+      name: 'Reports',
+      url: '/reports',
+      icon: 'icon-puzzle'
     }
   ],
 };
