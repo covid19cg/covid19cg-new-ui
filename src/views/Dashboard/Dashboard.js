@@ -1,4 +1,4 @@
-import React, { Component, lazy, useEffect, useState, Suspense } from 'react';
+import React, { lazy, useState, Suspense, useRef } from 'react';
 import {
   Card,
   CardBody,
@@ -12,8 +12,11 @@ import anime from 'animejs';
 import { useEffectOnce, useMeasure } from 'react-use';
 
 import { ScaleGraph } from './ScaleGraph';
-import { CHHATTISGARH, STATE_CODES } from '../../core/constants';
+import { CHHATTISGARH, STATE_CODES, MAP_META } from '../../core/constants';
 import { parseStateTimeseries } from '../../core/common';
+import { Level } from './Level';
+import Minigraph from './Minigraph/Minigraph';
+import MapExplorer from './MapExplorer/MapExplorer';
 const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
 const brandPrimary = getStyle('--primary')
@@ -444,6 +447,7 @@ const mainChartOpts = {
 };
 
 const Dashboard = (props) => {
+  const mapRef = useRef();
 
   const [fetched, setFetched] = useState(false);
   const [timeseries, setTimeseries] = useState({});
@@ -524,14 +528,6 @@ const Dashboard = (props) => {
     }
   };
 
-  const toggle = () => {
-    setDropdownOpen(!dropdownOpen);
-  }
-
-  const onRadioBtnClick = (radioSelected) => {
-    setRadioSelected(radioSelected);
-  }
-
   const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
   const { localization } = props;
@@ -547,6 +543,35 @@ const Dashboard = (props) => {
                   <ScaleGraph localization={{ ...localization.common, ...localization.covid }} />
                 </Suspense>
               </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3}>
+          <Card>
+            <CardBody>
+              {fetched && <Level
+                localization={{ ...localization.common, ...localization.covid }}
+                onSetMapOption={setMapOption}
+                data={stateData} />}
+              {fetched && <Minigraph
+                timeseries={timeseries} />}
+              {fetched && <>
+                {
+                  <MapExplorer
+                    localization={{ ...localization.common, ...localization.covid }}
+                    forwardRef={mapRef}
+                    mapMeta={MAP_META[stateName]}
+                    states={[stateData]}
+                    stateDistrictWiseData={districtData}
+                    stateTestData={testData}
+                    isCountryLoaded={false}
+                    mapOptionProp={mapOption}
+                  />
+                }
+              </>
+              }
             </CardBody>
           </Card>
         </Col>

@@ -1331,13 +1331,13 @@ h6 {
 }
 
 .map-switcher {
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  position: absolute;
-  top: 13rem;
-  width: 30rem;
+  // align-self: center;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // position: absolute;
+  // top: 13rem;
+  // width: 30rem;
 
   .highlight {
     background: $cherry-light;
@@ -1369,16 +1369,17 @@ h6 {
 }
 
 .Level {
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 30rem;
+  // align-self: center;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // width: 30rem;
 
 
   .level-item {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
+    text-align: center;
     width: calc(25%);
 
     & > * {
@@ -1388,7 +1389,7 @@ h6 {
 
   h1,
   h5 {
-    margin-bottom: 0;
+    margin-bottom: 0.2rem;
   }
 
   h1 {
@@ -1396,7 +1397,7 @@ h6 {
   }
 
   h4 {
-    margin-bottom: -.5rem;
+    margin-bottom: -0.2rem;
   }
 
   h5 {
@@ -1849,10 +1850,10 @@ table {
 }
 
 .MapExplorer {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  width: 30rem;
+  // align-self: center;
+  // display: flex;
+  // flex-direction: column;
+  // width: 30rem;
 
   &.stickied {
     position: sticky !important;
@@ -2027,13 +2028,13 @@ table {
   }
 
   .map-stats {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-    position: relative;
-    width: 100%;
-    z-index: 10;
+    // display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    // margin-bottom: 1rem;
+    // position: relative;
+    // width: 100%;
+    // z-index: 10;
 
     h1,
     h5,
@@ -2055,11 +2056,11 @@ table {
       display: flex;
       flex: 1;
       flex-direction: column;
-      height: 3rem;
+      height: auto;
       margin-bottom: 1rem;
       margin-left: .25rem;
       margin-right: .25rem;
-      padding: .25rem;
+      padding: 10px;
       position: relative;
       transition: all .1s ease-in-out;
 
@@ -2574,14 +2575,14 @@ input {
 }
 
 .Minigraph {
-  align-self: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  margin: 0;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  width: 30rem;
+  // align-self: center;
+  // display: flex;
+  // flex-direction: row;
+  // justify-content: space-between;
+  // margin: 0;
+  // margin-bottom: 1rem;
+  // margin-top: 1rem;
+  // width: 30rem;
 
   .svg-parent {
     background: transparent !important;
@@ -4200,6 +4201,11 @@ footer {
   .map-switcher,
   .updates-header {
     width: calc(100% - 2rem);
+  }
+  .Level,
+  .Minigraph,
+  .MapExplorer {
+    width: auto;
   }
 
   .Home,

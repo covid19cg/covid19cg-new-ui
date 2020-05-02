@@ -3,6 +3,9 @@ export default {
     beginning: 'Beginning',
     month: 'Months',
     weeks: 'Weeks',
+    states: {
+      chhattisgarh: 'Chhattisgarh'
+    },
     months: {
       january: 'January',
       february: 'February',
@@ -26,7 +29,8 @@ export default {
       confirmed: 'Confirmed',
       active: 'Active',
       recovered: 'Recovered',
-      deceased: 'Deceased'
+      deceased: 'Deceased',
+      tested: 'Tested'
     }
   },
   breadcrumb: {
