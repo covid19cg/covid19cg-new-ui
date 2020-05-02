@@ -31,6 +31,15 @@ export default {
       recovered: 'Recovered',
       deceased: 'Deceased',
       tested: 'Tested'
+    },
+    deep_dive: {
+      total_cases: 'Total Cases',
+      daily_cases: 'Daily Cases',
+      total_cases_by_state: 'Total Cases By State',
+      states_growth_trend: 'States - Growth Trend',
+      patient_gender: 'Patient Gender',
+      patients_by_age: 'Patients By Age',
+      patients_by_nationality: 'Patients By Nationality'
     }
   },
   breadcrumb: {
