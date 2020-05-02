@@ -3,6 +3,9 @@ export default {
     beginning: 'शुरुआत',
     month: 'महीना',
     weeks: 'सप्ताह',
+    states: {
+      chhattisgarh: 'छत्तीसगढ़'
+    },
     months: {
       january: 'जनवरी',
       february: 'फरवरी',
@@ -26,7 +29,8 @@ export default {
       confirmed: 'पुष्टीकृत',
       active: 'सक्रिय',
       recovered: 'स्वस्थ',
-      deceased: 'मृतक'
+      deceased: 'मृतक',
+      tested: 'परीक्षण किया'
     }
   },
   breadcrumb: {

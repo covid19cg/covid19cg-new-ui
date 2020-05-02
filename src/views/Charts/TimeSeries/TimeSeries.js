@@ -425,7 +425,7 @@ function TimeSeries(props) {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col-12 col-sm-6 col-lg-12">
+        <div className="col-12">
           <div className="float-right btn-toolbar mb-4">
             <div className="btn-group">
               <button
