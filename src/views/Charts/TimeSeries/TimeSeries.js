@@ -396,13 +396,15 @@ function TimeSeries(props) {
     }
   }, [timeseries, graphData]);
 
+  const { localization } = props;
+
   const focusDate = moment(datapoint.date).utcOffset('+05:30');
   let dateStr = focusDate.format('DD MMMM');
   dateStr += focusDate.isSame(
     moment().utcOffset('+05:30').subtract(1, 'days'),
     'day'
   )
-    ? ' Yesterday'
+    ? ' ' + (localization.day.yesterday.length > 2 ? localization.day.yesterday : localization.day.yesterday)
     : '';
 
   const chartKey1 = chartType === 1 ? 'totalconfirmed' : 'dailyconfirmed';
@@ -423,7 +425,7 @@ function TimeSeries(props) {
   return (
     <React.Fragment>
       <div className="row">
-        <div className="col-12 col-sm-6 col-lg-12">
+        <div className="col-12">
           <div className="float-right btn-toolbar mb-4">
             <div className="btn-group">
               <button
@@ -431,15 +433,15 @@ function TimeSeries(props) {
                 onClick={() => setLastDaysCount(Infinity)}
                 className={'btn btn-outline-secondary ' + (lastDaysCount === Infinity ? 'active' : '')}
               >
-                Beginning
+                {localization.beginning}
             </button>
               <button
                 type="button"
                 onClick={() => setLastDaysCount(30)}
                 className={'btn btn-outline-secondary ' + (lastDaysCount === 30 ? 'active' : '')}
-                aria-label="1 month"
+                aria-label={"1 "+localization.month}
               >
-                1 Month
+                1 {localization.month}
             </button>
               <button
                 type="button"
@@ -447,7 +449,7 @@ function TimeSeries(props) {
                 className={'btn btn-outline-secondary ' + (lastDaysCount === 14 ? 'active' : '')}
                 aria-label="14 days"
               >
-                2 Weeks
+                2 {localization.weeks}
             </button>
             </div>
           </div>
@@ -458,7 +460,7 @@ function TimeSeries(props) {
         <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent" ref={wrapperRef}>
             <div className="stats">
-              <h5 className={`${!moving ? 'title' : ''}`}>Confirmed</h5>
+              <h5 className={`${!moving ? 'title' : ''}`}>{localization.status.confirmed}</h5>
               <h5 className={`${moving ? 'title' : ''}`}>{`${dateStr}`}</h5>
               <div className="stats-bottom">
                 <h2>{formatNumber(datapoint[chartKey1])}</h2>
@@ -476,7 +478,7 @@ function TimeSeries(props) {
         <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-blue">
             <div className="stats is-blue">
-              <h5 className={`${!moving ? 'title' : ''}`}>Active</h5>
+              <h5 className={`${!moving ? 'title' : ''}`}>{localization.status.active}</h5>
               <h5 className={`${moving ? 'title' : ''}`}>{`${dateStr}`}</h5>
               <div className="stats-bottom">
                 <h2>{formatNumber(datapoint[chartKey2])}</h2>
@@ -494,7 +496,7 @@ function TimeSeries(props) {
         <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-green">
             <div className="stats is-green">
-              <h5 className={`${!moving ? 'title' : ''}`}>Recovered</h5>
+              <h5 className={`${!moving ? 'title' : ''}`}>{localization.status.recovered}</h5>
               <h5 className={`${moving ? 'title' : ''}`}>{`${dateStr}`}</h5>
               <div className="stats-bottom">
                 <h2>{formatNumber(datapoint[chartKey3])}</h2>
@@ -512,7 +514,7 @@ function TimeSeries(props) {
         <div className="col-12 col-sm-6 col-lg-6">
           <div className="svg-parent is-gray">
             <div className="stats is-gray">
-              <h5 className={`${!moving ? 'title' : ''}`}>Deceased</h5>
+              <h5 className={`${!moving ? 'title' : ''}`}>{localization.status.deceased}</h5>
               <h5 className={`${moving ? 'title' : ''}`}>{`${dateStr}`}</h5>
               <div className="stats-bottom">
                 <h2>{formatNumber(datapoint[chartKey4])}</h2>

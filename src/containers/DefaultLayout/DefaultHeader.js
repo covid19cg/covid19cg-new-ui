@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import { Badge, UncontrolledDropdown, DropdownItem, DropdownMenu, DropdownToggle, Nav, NavItem } from 'reactstrap';
+import { Nav, NavItem } from 'reactstrap';
 import PropTypes from 'prop-types';
 
-import { AppAsideToggler, AppNavbarBrand, AppSidebarToggler } from '@coreui/react';
-import logo from '../../assets/img/brand/logo.svg'
-import sygnet from '../../assets/img/brand/sygnet.svg'
+import { AppSidebarToggler } from '@coreui/react';
 
 const propTypes = {
   children: PropTypes.node,
@@ -15,32 +13,38 @@ const defaultProps = {};
 
 class DefaultHeader extends Component {
   render() {
-
     // eslint-disable-next-line
-    const { children, ...attributes } = this.props;
+    const { children, localization: { menus }, updateLanguage } = this.props;
+    // console.log({restProps});
 
     return (
       <React.Fragment>
         <AppSidebarToggler className="d-lg-none" display="md" mobile />
-        <h4 style={{margin: 0}} className="navbar-brand">COVID-19 CG</h4>
-        {/* <AppNavbarBrand
-          full={{ src: logo, width: 89, height: 25, alt: 'Covid-19 CG' }}
-          minimized={{ src: sygnet, width: 30, height: 30, alt: 'Covid-19 CG' }}
-        /> */}
+        <Link className="navbar-brand" to="/">COVID-19 CG</Link>
         <AppSidebarToggler className="d-md-down-none" display="lg" />
 
         <Nav className="d-md-down-none" navbar>
           <NavItem className="px-3">
-            <NavLink to="/dashboard" className="nav-link" >Dashboard</NavLink>
+            <NavLink to="/dashboard" className="nav-link" >{menus.dashboard}</NavLink>
           </NavItem>
           <NavItem className="px-3">
-            <Link to="/emergency-contacts" className="nav-link">Emergency Contacts</Link>
+            <Link to="/emergency-contacts" className="nav-link">{menus.emergency_contacts}</Link>
+          </NavItem>
+          <NavItem className="px-3">
+            <Link to="/reports" className="nav-link">{menus.reports}</Link>
           </NavItem>
         </Nav>
         <Nav className="ml-auto" navbar>
-          {/* <NavItem className="d-md-down-none">
-            <NavLink to="#" className="nav-link"><i className="icon-bell"></i><Badge pill color="danger">5</Badge></NavLink>
-          </NavItem> */}
+          <NavItem className="mr-2">
+            <select className="form-control"
+              defaultValue={localStorage.getItem('locale') || 'en'}
+              onChange={(event) => {
+                updateLanguage(event.target.value);
+              }}>
+              <option value="en">English</option>
+              <option value="hi">Hindi</option>
+            </select>
+          </NavItem>
 
 
           {/* <UncontrolledDropdown nav direction="down">
@@ -75,3 +79,4 @@ DefaultHeader.propTypes = propTypes;
 DefaultHeader.defaultProps = defaultProps;
 
 export default DefaultHeader;
+

@@ -1,29 +1,23 @@
-import React, { Component, lazy, Suspense } from 'react';
-import { Bar, Line } from 'react-chartjs-2';
-import axios from 'axios';
+
+import React, { lazy, useState, Suspense, useRef } from 'react';
 import {
-  Badge,
-  Button,
-  ButtonDropdown,
-  ButtonGroup,
-  ButtonToolbar,
   Card,
   CardBody,
-  CardFooter,
-  CardHeader,
-  CardTitle,
   Col,
-  Dropdown,
-  DropdownItem,
-  DropdownMenu,
-  DropdownToggle,
-  Progress,
-  Row,
-  Table,
+  Row
 } from 'reactstrap';
 import { CustomTooltips } from '@coreui/coreui-plugin-chartjs-custom-tooltips';
 import { getStyle, hexToRgba } from '@coreui/coreui/dist/js/coreui-utilities'
+import axios from 'axios';
+import anime from 'animejs';
+import { useEffectOnce, useMeasure } from 'react-use';
+
 import { ScaleGraph } from './ScaleGraph';
+import { CHHATTISGARH, STATE_CODES, MAP_META } from '../../core/constants';
+import { parseStateTimeseries } from '../../core/common';
+import { Level } from './Level';
+import Minigraph from './Minigraph/Minigraph';
+import MapExplorer from './MapExplorer/MapExplorer';
 const Widget03 = lazy(() => import('../../views/Widgets/Widget03'));
 
 const brandPrimary = getStyle('--primary')
@@ -453,63 +447,137 @@ const mainChartOpts = {
   },
 };
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
+const Dashboard = (props) => {
+  const mapRef = useRef();
 
-    this.toggle = this.toggle.bind(this);
-    this.onRadioBtnClick = this.onRadioBtnClick.bind(this);
+  const [fetched, setFetched] = useState(false);
+  const [timeseries, setTimeseries] = useState({});
+  const [graphOption, setGraphOption] = useState(1);
+  const [timeseriesMode, setTimeseriesMode] = useState(true);
+  const [timeseriesLogMode, setTimeseriesLogMode] = useState(false);
+  const [stateData, setStateData] = useState({});
+  const [testData, setTestData] = useState({});
+  const [sources, setSources] = useState({});
+  const [districtData, setDistrictData] = useState({});
+  const [stateName] = useState(STATE_CODES['CT']);
+  const [mapOption, setMapOption] = useState('confirmed');
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [radioSelected, setRadioSelected] = useState(false);
 
-    this.state = {
-      dropdownOpen: false,
-      radioSelected: 2,
-    };
-  }
+  const [mapSwitcher, { width }] = useMeasure();
 
-  componentDidMount() {
-    // axios.get('https://api.covid19india.org/data.json');
-  }
+  // const toggle = toggle.bind(this);
+  // const onRadioBtnClick = onRadioBtnClick.bind(this);
 
-  toggle() {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen,
-    });
-  }
+  useEffectOnce(() => {
+    getState(CHHATTISGARH);
+  });
 
-  onRadioBtnClick(radioSelected) {
-    this.setState({
-      radioSelected: radioSelected,
-    });
-  }
+  const getState = async (code) => {
+    try {
+      const [
+        { data: dataResponse },
+        { data: stateDistrictWiseResponse },
+        { data: statesDailyResponse },
+        { data: stateTestResponse },
+        { data: sourcesResponse },
+      ] = await Promise.all([
+        axios.get('https://api.covid19india.org/data.json'),
+        axios.get('https://api.covid19india.org/state_district_wise.json'),
+        axios.get('https://api.covid19india.org/states_daily.json'),
+        axios.get('https://api.covid19india.org/state_test_data.json'),
+        axios.get('https://api.covid19india.org/sources_list.json'),
+      ]);
+      const states = dataResponse.statewise;
+      const ts = parseStateTimeseries(statesDailyResponse)[code];
+      const statesTests = stateTestResponse.states_tested_data;
+      const name = STATE_CODES[code];
+      const sourceList = sourcesResponse.sources_list;
 
-  loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
+      setStateData(states.find((s) => s.statecode === code));
+      setTimeseries(ts);
+      setTestData(
+        statesTests.filter(
+          (obj) => obj.state === name && obj.totaltested !== ''
+        )
+      );
+      setDistrictData({
+        [name]: stateDistrictWiseResponse[name],
+      });
+      setSources(sourceList.filter((state) => state.statecode === code));
+      setFetched(true);
 
-  render() {
+      anime({
+        targets: '.highlight',
+        duration: 200,
+        delay: 3000,
+        translateX:
+          mapOption === 'confirmed'
+            ? `${width * 0}px`
+            : mapOption === 'active'
+              ? `${width * 0.25}px`
+              : mapOption === 'recovered'
+                ? `${width * 0.5}px`
+                : mapOption === 'deceased'
+                  ? `${width * 0.75}px`
+                  : '0px',
+        easing: 'spring(1, 80, 90, 10)',
+        opacity: 1,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-    return (
-      <div className="animated fadeIn">
-        <Row>
-          <Col lg="4">
-            <Card>
-              <CardBody style={{ paddingBottom: 5 }}>
-                <div>
+  const loading = () => <div className="animated fadeIn pt-1 text-center">Loading...</div>
 
-                  {/* <ScaleGraph /> */}
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-          <Col lg="8">
-            <Card>
-              <CardBody style={{ paddingBottom: 5 }}>
-                <div>
-                  <ScaleGraph />
-                </div>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
-        <Row>
+  const { localization } = props;
+
+  return (
+    <div className="animated fadeIn">
+      <Row>
+        <Col>
+          <Card>
+            <CardBody style={{ paddingBottom: 5 }}>
+              <div>
+                <Suspense fallback={loading()}>
+                  <ScaleGraph localization={{ ...localization.common, ...localization.covid }} />
+                </Suspense>
+              </div>
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      <Row>
+        <Col xs={12} sm={6} md={6} lg={6} xl={3}>
+          <Card>
+            <CardBody>
+              {fetched && <Level
+                localization={{ ...localization.common, ...localization.covid }}
+                onSetMapOption={setMapOption}
+                data={stateData} />}
+              {fetched && <Minigraph
+                timeseries={timeseries} />}
+              {fetched && <>
+                {
+                  <MapExplorer
+                    localization={{ ...localization.common, ...localization.covid }}
+                    forwardRef={mapRef}
+                    mapMeta={MAP_META[stateName]}
+                    states={[stateData]}
+                    stateDistrictWiseData={districtData}
+                    stateTestData={testData}
+                    isCountryLoaded={false}
+                    mapOptionProp={mapOption}
+                  />
+                }
+              </>
+              }
+            </CardBody>
+          </Card>
+        </Col>
+      </Row>
+      {/* <Row>
           <Col xs="12" sm="6" lg="3">
             <Card className="text-white bg-info">
               <CardBody className="pb-0">
@@ -606,8 +674,8 @@ class Dashboard extends Component {
               </div>
             </Card>
           </Col>
-        </Row>
-        <Row>
+        </Row> */}
+      {/* <Row>
           <Col>
             <Card>
               <CardBody>
@@ -662,9 +730,9 @@ class Dashboard extends Component {
               </CardFooter>
             </Card>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+      {/* <Row>
           <Col xs="6" sm="6" lg="3">
             <Suspense fallback={this.loading()}>
               <Widget03 dataBox={() => ({ variant: 'facebook', friends: '89k', feeds: '459' })} >
@@ -704,9 +772,9 @@ class Dashboard extends Component {
               </Widget03>
             </Suspense>
           </Col>
-        </Row>
+        </Row> */}
 
-        <Row>
+      {/* <Row>
           <Col>
             <Card>
               <CardHeader>
@@ -1146,10 +1214,9 @@ class Dashboard extends Component {
               </CardBody>
             </Card>
           </Col>
-        </Row>
-      </div>
-    );
-  }
+        </Row> */}
+    </div>
+  );
 }
 
 export default Dashboard;
