@@ -1,9 +1,9 @@
 {
-  "short_name": "CoreUI-React",
-  "name": "CoreUI-React sample",
+  "short_name": "COVID19-CG",
+  "name": "COVID-19 CG Updates",
   "icons": [
     {
-      "src": "./assets/img/favicon.png",
+      "src": "./assets/img/logo.png",
       "sizes": "100x100",
       "type": "image/png"
     }
