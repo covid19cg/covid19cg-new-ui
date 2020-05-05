@@ -3,6 +3,7 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import LocalizedStrings from 'react-localization';
 import localization from './localization';
+import ReportPopup from './views/ReportPopup/ReportPopup';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -56,6 +57,7 @@ class App extends Component {
     return (
       <HashRouter>
         <React.Suspense fallback={loading()}>
+          <ReportPopup />
           <Switch>
             <Route path="/" name="Home" render={props => <DefaultLayout {...props} {...localizationProps} />} />
           </Switch>
