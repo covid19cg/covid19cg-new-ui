@@ -49,7 +49,7 @@ export default {
   header: {
     menus: {
       dashboard: 'Dashboard',
-      emergency_contacts: 'Emergency Contacts',
+      essentials: 'Essentials',
       reports: 'Reports'
     }
   },
@@ -62,6 +62,7 @@ export default {
         variant: 'info'
       },
     },
+    /*
     {
       name: 'Emergency Contacts',
       url: '/emergency-contacts',
@@ -72,6 +73,7 @@ export default {
       url: '/deep-dive',
       icon: 'icon-drop',
     },
+    */
     {
       name: 'Essentials',
       url: '/essentials',
