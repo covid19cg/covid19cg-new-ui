@@ -49,7 +49,7 @@ export default {
   header: {
     menus: {
       dashboard: 'डैशबोर्ड',
-      emergency_contacts: 'आपातकालीन संपर्क',
+      essentials: 'आवश्यक जानकारी',
       reports: 'रिपोर्ट'
     }
   },
@@ -62,6 +62,7 @@ export default {
         variant: 'info'
       },
     },
+    /*
     {
       name: 'आपातकालीन संपर्क',
       url: '/emergency-contacts',
@@ -72,6 +73,7 @@ export default {
       url: '/deep-dive',
       icon: 'icon-drop',
     },
+    */
     {
       name: 'आवश्यक जानकारी',
       url: '/essentials',
