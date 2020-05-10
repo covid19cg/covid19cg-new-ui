@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Redirect, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 
@@ -69,7 +69,6 @@ class DefaultLayout extends Component {
                         )} />
                     ) : (null);
                   })}
-                  <Redirect from={'/'} to={'/dashboard'} />
                 </Switch>
               </Suspense>
             </Container>
