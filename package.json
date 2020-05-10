@@ -19,6 +19,7 @@
     "@juggle/resize-observer": "^3.1.3",
     "@material-ui/core": "^4.9.13",
     "@material-ui/icons": "^4.9.1",
+    "@sentry/browser": "^5.15.5",
     "animejs": "^3.2.0",
     "axios": "^0.19.2",
     "bootstrap": "^4.3.1",

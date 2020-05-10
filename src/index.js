@@ -4,10 +4,12 @@ import 'react-app-polyfill/stable';
 import './polyfill'
 import React from 'react';
 import ReactDOM from 'react-dom';
+import * as Sentry from '@sentry/browser';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+Sentry.init({dsn: "https://8144d2b391c74029a1b58ea3dd1bb10b@o231550.ingest.sentry.io/5233531"});
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
