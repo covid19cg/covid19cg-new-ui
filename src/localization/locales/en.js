@@ -67,6 +67,11 @@ export default {
       url: '/dashboard',
       icon: 'icon-speedometer'
     },
+    {
+      name: 'Migrant Information',
+      url: '/migrant-details',
+      icon: 'icon-user'
+    },
     /*
     {
       name: 'Emergency Contacts',
