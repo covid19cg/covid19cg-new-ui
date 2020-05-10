@@ -18,15 +18,16 @@ class App extends Component {
   constructor(props, state) {
     super(props, state);
     this.setLocale();
-  }
-
-  setLocale() {
-    this.selectedLocale = this.getLocale();
     this.appLocalization.setLanguage(this.selectedLocale);
     this.state = {
       localization: this.appLocalization,
       selectedLocale: this.selectedLocale
     }
+  }
+
+  setLocale() {
+    this.selectedLocale = this.getLocale();
+
   }
 
   getLocale() {

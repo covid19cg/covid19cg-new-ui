@@ -4,7 +4,6 @@ import deepmerge from 'deepmerge';
 import moment from 'moment';
 import React from 'react';
 import { Line } from 'react-chartjs-2';
-import { Card, CardBody, CardTitle } from 'reactstrap';
 
 function TotalConfirmedChart(props) {
   const dates = [];
