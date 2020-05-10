@@ -56,11 +56,16 @@ export default {
   menus: [
     {
       name: 'Home',
-      url: '/dashboard',
+      url: '/',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info'
       },
+    },
+    {
+      name: 'Dashboard',
+      url: '/dashboard',
+      icon: 'icon-speedometer'
     },
     /*
     {

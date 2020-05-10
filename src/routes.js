@@ -38,10 +38,11 @@ const User = React.lazy(() => import('./views/Users/User'));
 const DeepDive = React.lazy(() => import('./views/DeepDive/DeepDive'));
 const Essentials = React.lazy(() => import('./views/Essentials/Essentials'));
 const Reports = React.lazy(() => import('./views/Reports/Reports'));
+const Home = React.lazy(() => import('./views/Home/Home'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home' },
+  { path: '/', exact: true, name: 'Home', component: Home },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/deep-dive', name: 'Deep Dive', component: DeepDive },
   { path: '/essentials', name: 'Essentials', component: Essentials },

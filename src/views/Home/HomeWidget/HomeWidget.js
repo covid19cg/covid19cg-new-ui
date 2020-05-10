@@ -26,7 +26,7 @@ const defaultProps = {
   link: '#',
 };
 
-class Widget02 extends Component {
+class HomeWidget extends Component {
   render() {
     const { className, cssModule, header, mainText, icon, color, footer, link, children, variant, ...attributes } = this.props;
 
@@ -70,7 +70,7 @@ class Widget02 extends Component {
   }
 }
 
-Widget02.propTypes = propTypes;
-Widget02.defaultProps = defaultProps;
+HomeWidget.propTypes = propTypes;
+HomeWidget.defaultProps = defaultProps;
 
-export default Widget02;
+export default HomeWidget;
