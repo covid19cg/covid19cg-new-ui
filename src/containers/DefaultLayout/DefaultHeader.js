@@ -14,8 +14,7 @@ const defaultProps = {};
 class DefaultHeader extends Component {
   render() {
     // eslint-disable-next-line
-    const { children, localization: { menus }, updateLanguage } = this.props;
-    // console.log({restProps});
+    const { localization: { menus }, updateLanguage } = this.props;
 
     return (
       <React.Fragment>
