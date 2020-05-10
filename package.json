@@ -47,6 +47,7 @@
     "react-table": "^7.0.4",
     "react-test-renderer": "^16.8.6",
     "react-use": "^14.2.0",
+    "react-vertical-timeline-component": "^2.6.2",
     "reactstrap": "^8.0.0",
     "simple-line-icons": "^2.4.1",
     "topojson": "^3.0.2"

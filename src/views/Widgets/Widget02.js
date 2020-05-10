@@ -28,7 +28,7 @@ const defaultProps = {
 
 class Widget02 extends Component {
   render() {
-    const { className, cssModule, header, mainText, icon, color, footer, link, children, variant, ...attributes } = this.props;
+    const { className, cssModule, header, newTab, mainText, icon, color, footer, link, children, variant, ...attributes } = this.props;
 
     // demo purposes only
     const padding = (variant === '0' ? { card: 'p-3', icon: 'p-3', lead: 'mt-2' } : (variant === '1' ? {
@@ -48,9 +48,17 @@ class Widget02 extends Component {
 
     const cardFooter = function () {
       if (footer) {
+        let newTabProps = {};
+
+        if (newTab) {
+          newTabProps = {
+            target: '_blank',
+            rel: 'noopener noreferrer'
+          }
+        }
         return (
           <CardFooter className="px-3 py-2">
-            <a className="font-weight-bold font-xs btn-block text-muted" href={link}>View More
+            <a className="font-weight-bold font-xs btn-block text-muted" href={link} {...newTabProps}>View More
               <i className="fa fa-angle-right float-right font-lg"></i></a>
           </CardFooter>
         );
