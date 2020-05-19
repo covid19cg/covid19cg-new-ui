@@ -4,7 +4,8 @@ import {
   Card,
   CardBody,
   Col,
-  Row
+  Row,
+  Alert
 } from 'reactstrap';
 import axios from 'axios';
 import anime from 'animejs';
@@ -19,6 +20,7 @@ import MapExplorer from './MapExplorer/MapExplorer';
 import { Fab } from '@material-ui/core';
 import { Share } from '@material-ui/icons';
 import { openSharingTray } from '../../core/share';
+import { Link } from 'react-router-dom';
 
 //Random Numbers
 function random(min, max) {
@@ -115,6 +117,15 @@ const Dashboard = (props) => {
 
   return (
     <div className="animated fadeIn">
+      <Row>
+        <Col>
+          <Alert color='secondary'>
+            <Link to="/migrant-details" className="alert-link">
+              Click here to know migrant details
+            </Link>
+          </Alert>
+        </Col>
+      </Row>
       <Row>
         <Col>
           <Card>

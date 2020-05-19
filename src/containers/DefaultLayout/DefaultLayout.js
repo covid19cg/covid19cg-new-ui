@@ -1,5 +1,5 @@
 import React, { Component, Suspense } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import * as router from 'react-router-dom';
 import { Container, Row } from 'reactstrap';
 
@@ -32,7 +32,7 @@ class DefaultLayout extends Component {
 
   render() {
 
-    const { localization: { menus, header} } = this.props;
+    const { localization: { menus, header } } = this.props;
 
     return (
       <div className="app">
@@ -54,7 +54,7 @@ class DefaultLayout extends Component {
           <main className="main">
             <Row className="mb-3">
             </Row>
-            <Container fluid style={{padding: '0 20px'}}>
+            <Container fluid style={{ padding: '0 20px' }}>
               <Suspense fallback={this.loading()}>
                 <Switch>
                   {routes.map((route, idx) => {
@@ -70,6 +70,7 @@ class DefaultLayout extends Component {
                     ) : (null);
                   })}
                 </Switch>
+                <Redirect from={'/#/'} to={'/dashboard'} />
               </Suspense>
             </Container>
           </main>

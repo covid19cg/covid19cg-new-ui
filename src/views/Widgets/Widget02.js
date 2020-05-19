@@ -15,6 +15,7 @@ const propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   cssModule: PropTypes.object,
+  footerText: PropTypes.string
 };
 
 const defaultProps = {
@@ -24,11 +25,12 @@ const defaultProps = {
   color: 'primary',
   variant: '0',
   link: '#',
+  footerText: 'View More'
 };
 
 class Widget02 extends Component {
   render() {
-    const { className, cssModule, header, newTab, mainText, icon, color, footer, link, children, variant, ...attributes } = this.props;
+    const { className, cssModule, header, newTab, mainText, icon, color, footer, link, children, variant, footerText, ...attributes } = this.props;
 
     // demo purposes only
     const padding = (variant === '0' ? { card: 'p-3', icon: 'p-3', lead: 'mt-2' } : (variant === '1' ? {
@@ -58,7 +60,7 @@ class Widget02 extends Component {
         }
         return (
           <CardFooter className="px-3 py-2">
-            <a className="font-weight-bold font-xs btn-block text-muted" href={link} {...newTabProps}>View More
+            <a className="font-weight-bold font-xs btn-block text-muted" href={link} {...newTabProps}>{footerText}
               <i className="fa fa-angle-right float-right font-lg"></i></a>
           </CardFooter>
         );
