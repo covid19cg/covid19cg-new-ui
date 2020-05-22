@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import { HashRouter, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import './App.scss';
 import LocalizedStrings from 'react-localization';
 import localization from './localization';
 import ReportPopup from './views/ReportPopup/ReportPopup';
+import ReactGA from 'react-ga';
+import { createBrowserHistory } from 'history';
 
 const loading = () => <div className="animated fadeIn pt-3 text-center">Loading...</div>;
 
@@ -55,15 +57,23 @@ class App extends Component {
       updateLanguage: this.changeLanguage.bind(this)
     };
 
+    const history = createBrowserHistory();
+
+    // Initialize google analytics page view tracking
+    history.listen(location => {
+      ReactGA.set({ page: location.pathname }); // Update the user's current page
+      ReactGA.pageview(location.pathname); // Record a pageview for the given page
+    });
+
     return (
-      <HashRouter>
+      <Router history={history}>
         <React.Suspense fallback={loading()}>
           <ReportPopup />
           <Switch>
             <Route path="/" name="Home" render={props => <DefaultLayout {...props} {...localizationProps} />} />
           </Switch>
         </React.Suspense>
-      </HashRouter>
+      </Router>
     );
   }
 }

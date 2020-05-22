@@ -72,22 +72,18 @@ export default {
       url: '/migrant-details',
       icon: 'icon-user'
     },
-    /*
-    {
-      name: 'Emergency Contacts',
-      url: '/emergency-contacts',
-      icon: 'icon-puzzle',
-    },
-    {
-      name: 'Deep Dive',
-      url: '/deep-dive',
-      icon: 'icon-drop',
-    },
-    */
     {
       name: 'Essentials',
       url: '/essentials',
       icon: 'icon-pencil',
+     /*  attributes: {
+        onClick: e => {
+          ReactGA.event({
+            category: "Essentials",
+            action: "User visited Essentials page",
+          });
+        }
+      } */
     },
     {
       name: 'Reports',
