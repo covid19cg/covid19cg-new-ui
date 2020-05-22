@@ -5,7 +5,8 @@ import {
   CardBody,
   Col,
   Row,
-  Alert
+  Alert,
+  CardTitle
 } from 'reactstrap';
 import axios from 'axios';
 import anime from 'animejs';
@@ -21,6 +22,7 @@ import { Fab } from '@material-ui/core';
 import { Share } from '@material-ui/icons';
 import { openSharingTray } from '../../core/share';
 import { Link } from 'react-router-dom';
+import './Dashboard.scss';
 
 //Random Numbers
 function random(min, max) {
@@ -51,11 +53,18 @@ const Dashboard = (props) => {
 
   const [{ width }] = useMeasure();
 
-  // const toggle = toggle.bind(this);
-  // const onRadioBtnClick = onRadioBtnClick.bind(this);
-
   useEffectOnce(() => {
     getState(CHHATTISGARH);
+    window.FB.XFBML.parse(document.getElementById('fbLikeBtn'));
+    window.twttr.widgets.createFollowButton(
+      "CGCoronaUpdate",
+      document.getElementById("twitterFollowBtn"),
+      {
+        showScreenName: "false",
+        showCount: true,
+        size: "large"
+      }
+    );
   });
 
   const getState = async (code) => {
@@ -127,47 +136,94 @@ const Dashboard = (props) => {
         </Col>
       </Row>
       <Row>
-        <Col>
-          <Card>
-            <CardBody style={{ paddingBottom: 5 }}>
-              <div>
-                <Suspense fallback={loading()}>
-                  <ScaleGraph localization={{ ...localization.common, ...localization.covid }} />
-                </Suspense>
-              </div>
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={12} sm={6} md={6} lg={6} xl={3}>
-          <Card>
-            <CardBody>
-              {fetched && <Level
-                localization={{ ...localization.common, ...localization.covid }}
-                onSetMapOption={setMapOption}
-                data={stateData} />}
-              {fetched && <Minigraph
-                timeseries={timeseries} />}
-              {fetched && <>
-                {
-                  <MapExplorer
+        <Col lg={10}>
+          <Row>
+            <Col>
+              <Card>
+                <CardBody style={{ paddingBottom: 5 }}>
+                  <div>
+                    <Suspense fallback={loading()}>
+                      <ScaleGraph localization={{ ...localization.common, ...localization.covid }} />
+                    </Suspense>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12} sm={6} md={6} lg={6} xl={6}>
+              <Card>
+                <CardBody>
+                  {fetched && <Level
                     localization={{ ...localization.common, ...localization.covid }}
-                    forwardRef={mapRef}
-                    mapMeta={MAP_META[stateName]}
-                    states={[stateData]}
-                    stateDistrictWiseData={districtData}
-                    stateTestData={testData}
-                    isCountryLoaded={false}
-                    mapOptionProp={mapOption}
-                  />
-                }
-              </>
-              }
-            </CardBody>
-          </Card>
+                    onSetMapOption={setMapOption}
+                    data={stateData} />}
+                  {fetched && <Minigraph
+                    timeseries={timeseries} />}
+                  {fetched && <>
+                    {
+                      <MapExplorer
+                        localization={{ ...localization.common, ...localization.covid }}
+                        forwardRef={mapRef}
+                        mapMeta={MAP_META[stateName]}
+                        states={[stateData]}
+                        stateDistrictWiseData={districtData}
+                        stateTestData={testData}
+                        isCountryLoaded={false}
+                        mapOptionProp={mapOption}
+                      />
+                    }
+                  </>
+                  }
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+        <Col lg={2}>
+          <Row>
+            <Col>
+              <Card>
+                <CardBody style={{ paddingBottom: 5 }}>
+                  <div>
+                    <CardTitle>Follow us on Social Media</CardTitle>
+                    <div className="fb_container" id="fbLikeBtn">
+                      <div className="fb-like"
+                        data-href="https://www.facebook.com/CGCoronaUpdate"
+                        data-width=""
+                        data-layout="button_count"
+                        data-action="like"
+                        data-size="large"
+                        data-share="true"
+                      ></div>
+                    </div>
+                    <div id="twitterFollowBtn">
+                    </div>
+                    <br />
+                    <a
+                      href='https://www.instagram.com/cgcoronaupdate/'
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <img src="https://cdn-wp.weshareapps.com/wp-content/uploads/2017/06/24214610/instagram-app.png"
+                        alt='Follow on instagram' width="32"
+                      />
+                    </a>
+                    <br />
+                    <hr />
+                    <div>
+                      <blockquote>
+                        CG Corona Update is a crowd sourced platform created voluntarily by people of Chhattisgarh for creating largest database of Chhattisgarh on Corona Virus for the common people. Anyone can use the information for making firm opinion, perception and decisions.
+                      </blockquote>
+                    </div>
+                  </div>
+                </CardBody>
+              </Card>
+            </Col>
+          </Row>
         </Col>
       </Row>
+
 
       <Fab onClick={(event) => openSharingTray()} color="primary" aria-label="add" style={{ position: 'fixed', bottom: '40px', right: '40px' }}>
         <Share />
