@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Route, Switch, HashRouter } from 'react-router-dom';
 import './App.scss';
 import LocalizedStrings from 'react-localization';
 import localization from './localization';
@@ -61,19 +61,20 @@ class App extends Component {
 
     // Initialize google analytics page view tracking
     history.listen(location => {
-      ReactGA.set({ page: location.pathname }); // Update the user's current page
-      ReactGA.pageview(location.pathname); // Record a pageview for the given page
+      const url =  location.hash.substr(1, location.hash.length-1);
+      ReactGA.set({ page: url }); // Update the user's current page
+      ReactGA.pageview(url); // Record a pageview for the given page
     });
 
     return (
-      <Router history={history}>
+      <HashRouter>
         <React.Suspense fallback={loading()}>
           <ReportPopup />
           <Switch>
             <Route path="/" name="Home" render={props => <DefaultLayout {...props} {...localizationProps} />} />
           </Switch>
         </React.Suspense>
-      </Router>
+      </HashRouter>
     );
   }
 }
