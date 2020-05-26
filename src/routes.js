@@ -43,7 +43,8 @@ const Migrants = React.lazy(() => import('./views/Migrants/Migrants'));
 
 // https://github.com/ReactTraining/react-router/tree/master/packages/react-router-config
 const routes = [
-  { path: '/', exact: true, name: 'Home', component: Home },
+  { path: '/', exact: true, name: 'Dashboard', component: Dashboard },
+  { path: '/home', exact: true, name: 'Home', component: Home },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/migrant-details', name: 'Migrant Information', component: Migrants },
   { path: '/deep-dive', name: 'Deep Dive', component: DeepDive },

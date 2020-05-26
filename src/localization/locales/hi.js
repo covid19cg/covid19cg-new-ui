@@ -56,11 +56,21 @@ export default {
   menus: [
     {
       name: 'होम',
-      url: '/dashboard',
+      url: '/home',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info'
       },
+    },
+    {
+      name: 'डैशबोर्ड',
+      url: '/dashboard',
+      icon: 'icon-speedometer'
+    },
+    {
+      name: 'प्रवासी जानकारी',
+      url: '/migrant-details',
+      icon: 'icon-user'
     },
     /*
     {

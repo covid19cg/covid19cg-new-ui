@@ -56,7 +56,7 @@ export default {
   menus: [
     {
       name: 'Home',
-      url: '/',
+      url: '/home',
       icon: 'icon-speedometer',
       badge: {
         variant: 'info'
